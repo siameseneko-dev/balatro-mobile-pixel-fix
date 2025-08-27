@@ -1,5 +1,6 @@
 # Pixel Fix
 This is a fork that fixes the CRT shader for Google Pixel (and possibly other) phones, removing the black void while retaining (almost) all of the CRT shader by removing the noise function.
+Tested on a Pixel 7 Pro
 
 # Original ReadMe:
 
