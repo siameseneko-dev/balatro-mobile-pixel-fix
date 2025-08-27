@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -131,7 +131,14 @@ internal class Patching
             ApplyPatch("functions/button_callbacks.lua", "highdpi = (love.system.getOS() == 'OS X')", "    highdpi = (love.system.getOS() == 'OS X' or love.system.getOS() == 'Android' or love.system.getOS() == 'iOS')");
         }
 
-        if (AskQuestion("Would you like to apply the CRT shader disable patch? (Required for Pixel and some other devices!)"))
+        if (AskQuestion("Would you like to apply the noise disable patch? (Almost indistiguishable, may be required for Pixel and some other devices!)"))
+        {
+            ApplyPatch("resources/shaders/CRT.fs", "//Add in some noise", "/*");
+            ApplyPatch("resources/shaders/CRT.fs", "//contrast", "*/");
+            ApplyPatch("game.lua","G.SHADERS['CRT']:send('noise", "--");
+        }   
+        
+        else if (AskQuestion("Would you like to apply the CRT shader disable patch? (Can help if the noise removal patch doesn't work)"))
         {
             ApplyPatch("globals.lua", "crt = ", "            crt = 0,");
             ApplyPatch("game.lua", "G.SHADERS['CRT'])", "");
